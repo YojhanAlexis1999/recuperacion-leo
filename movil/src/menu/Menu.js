@@ -11,7 +11,7 @@ const Menu = ({ navigation }) => {
 
     return (
         <NavigationContainer independent={true}>
-            <menu.Navigator initialRouteName="Productos">
+            <menu.Navigator style={styles.color} initialRouteName="Productos">
                 
                 <menu.Screen name="Pedidos" component={() => <ModuloPedidos navigation={navigation}/>} />
                 
@@ -21,3 +21,14 @@ const Menu = ({ navigation }) => {
 }
 
 export default Menu
+
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        paddingTop: Platform.OS === 'android' ? 25 : 0,
+        
+    },
+    color: {
+        backgroundColor: "black"
+    },
+})

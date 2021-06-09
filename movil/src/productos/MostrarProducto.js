@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, StyleSheet, Image,ImageBackground, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, ScrollView, TextInput } from 'react-native'
 import ClienteAxios from '../config/axios'
 
 const MostrarProducto = ({ route }) => {
@@ -7,6 +7,7 @@ const MostrarProducto = ({ route }) => {
     const { id_producto_, precio_producto } = route.params
 
     const [producto, setProducto] = useState([])
+    const [adiciones, setAdiciones] = useState('')
     const [cantidad, setCantidad] = useState(1)
     const [precio, setPrecio] = useState(parseInt(precio_producto))
 
@@ -30,6 +31,7 @@ const MostrarProducto = ({ route }) => {
             id_usuario: 1,
             id_productos: id_producto_,
             cantidad: cantidad,
+            adiciones: adiciones,
             precio: precio
         })
     }
@@ -39,53 +41,58 @@ const MostrarProducto = ({ route }) => {
     }, [])
 
     return (
-<ImageBackground 
-                        source={require('../imagenes/beer24.jpg')}
-                        style={styles.images}
-                    >
-        <SafeAreaView style={styles.safeArea}>
+        <ImageBackground
+            source={require('../imagenes/beer24.jpg')}
+            style={styles.images}
+        >
+            <SafeAreaView style={styles.safeArea}>
 
-            {producto.map(item => {
-                return (
-                    
-                        <View>
+                    {producto.map(item => {
+                        return (
 
-
-                            <Text>{item.nombre}</Text>
-
-                            <Image
-                                source={{ uri: item.img }}
-                                style={styles.imagen}
-                            />
+                            <View>
 
 
-                            <Text style={styles.descripcion}>{item.descripcion}</Text>
-                            <Text style={styles.texto}>{item.precio}</Text>
+                                <Text>{item.nombre}</Text>
 
-                        </View>
-                    
-                )
-            })}
+                                <Image
+                                    source={{ uri: item.img }}
+                                    style={styles.imagen}
+                                />
 
 
-            <TouchableOpacity onPress={AumentarCantidad}>
-                <Text style={styles.texto}>+</Text>
-            </TouchableOpacity>
+                                <Text style={styles.descripcion}>{item.descripcion}</Text>
+                                <Text style={styles.texto}>{item.precio}</Text>
 
-            <TouchableOpacity onPress={DisminuirCantidad}>
-                <Text style={styles.texto}>-</Text>
-            </TouchableOpacity>
+                            </View>
 
-            <TouchableOpacity style={styles.boton} onPress={AgregarPedido}>
-                <Text >AGREGAR PEDIDO</Text>
-            </TouchableOpacity>
+                        )
+                    })}
 
-            <Text style={styles.texto}>cantidad: {cantidad}</Text>
-            <Text style={styles.texto}>precio: {precio}</Text>
 
-            
-        </SafeAreaView>
-        </ImageBackground >
+                    <TouchableOpacity onPress={AumentarCantidad}>
+                        <Text style={styles.texto}>+</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={DisminuirCantidad}>
+                        <Text style={styles.texto}>-</Text>
+                    </TouchableOpacity>
+
+                    <TextInput 
+                        onChangeText={(value) => setAdiciones(value)}
+                        placeholder="Adiciones"
+                        style={{ width: '100%', height: 60, borderColor: '#fff', borderWidth: 2, color: '#fff' }}
+                    />
+
+                    <TouchableOpacity style={styles.boton} onPress={AgregarPedido}>
+                        <Text >AGREGAR PEDIDO</Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.texto}>cantidad: {cantidad}</Text>
+                    <Text style={styles.texto}>precio: {precio}</Text>
+
+            </SafeAreaView>
+        </ImageBackground>
 
     )
 }
@@ -99,12 +106,12 @@ const styles = StyleSheet.create({
     },
     texto: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 15,
         left: 30
     },
     descripcion: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 20,
         left: 10
     },
     container: {

@@ -7,8 +7,10 @@ import Productos from './src/productos'
 import ListadoCategorias from './src/productos/ListadoCategorias'
 import ListarProductos from './src/productos/ListarProductos'
 import MostrarProducto from './src/productos/MostrarProducto'
+import ListarPedido from './src/productos/ListarPedido'
 import Preparar from './src/productos/Preparar'
 import Usuario from './src/productos/Usuario'
+import Domicilios from './src/productos/Domicilios'
 
 export default function App() {
 
@@ -23,7 +25,9 @@ export default function App() {
         <AppStack.Screen name="Preparar" component={Preparar} options={{ headerShown: false }}/>
         <AppStack.Screen name="ListadoProductos" component={ListarProductos} options={{ headerShown: false }}/>
         <AppStack.Screen name="MostrarProducto" component={MostrarProducto} options={{ headerShown: false }}/>
+        <AppStack.Screen name="ListarPedido" component={ListarPedido} options={{ headerShown: false }}/>
         <AppStack.Screen name="Usuario" component={Usuario} options={{ headerShown: true }}/>
+        <AppStack.Screen name="Domicilios" component={Domicilios} options={{ headerShown: true }}/>
       </AppStack.Navigator>
     </NavigationContainer>
   );
